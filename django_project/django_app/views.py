@@ -1,7 +1,18 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
 
 
+class CustomLoginView(LoginView):
+    template_name = 'login.html'
+
+    def get_success_url(self):
+        return reverse_lazy('create_vcard')
+
+
+@login_required
 def create_vcard(request):
     if request.method == 'POST':
         # Retrieve data from the form
@@ -13,8 +24,6 @@ def create_vcard(request):
         website = request.POST.get('website')
         notes = request.POST.get('notes')
 
-        # Do something with the form data (e.g., create a vCard)
-        # For demonstration purposes, let's just print the data to the console
         print(f"Name: {name}")
         print(f"Email: {email}")
         print(f"Address: {address}")
@@ -23,8 +32,6 @@ def create_vcard(request):
         print(f"Website: {website}")
         print(f"Notes: {notes}")
 
-        # Optionally, you can return a response indicating success
         return HttpResponse("VCard created successfully!")
     else:
-        # If the request method is not POST, render the form template
         return render(request, 'create_vcard.html')
