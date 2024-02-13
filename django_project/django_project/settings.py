@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'vcard_creation'
+    'vcard_creation',
+    'vcard'
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,25 @@
+<!-- my_template.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Page Title{% endblock %}</title>
+</head>
+<body>
+    <div>
+        <h1>{% block header %}Page Header{% endblock %}</h1>
+        <p>{% block short_text %}Short Description{% endblock %}</p>
+        <img src="{% block image %}/media/images/aaaaaa.png{% endblock %}" alt="Image">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone">
+            <button type="submit">Submit</button>
+        </form>
+        <p>{% block additional_text %}Additional Information{% endblock %}</p>
+        <a href="{% url 'download_vcf' %}"><button>Download vCard</button></a>
+    </div>
+</body>
+</html>
