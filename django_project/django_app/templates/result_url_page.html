@@ -10,7 +10,9 @@
 <div>
     <h2>Kod QR:</h2>
     {% if data.qr_image %}
-    <img src="data:image/png;base64,{{ data.qr_image }}" alt="QR">
+    <img id="qrCodeImage" src="data:image/png;base64,{{ data.qr_image }}" alt="QR">
+    <br>
+    <a id="downloadLink" href="#" onclick="downloadQR()">Pobierz kod QR</a> <!-- Link to download QR code image -->
     {% else %}
     <p>No QR available.</p>
     {% endif %}
@@ -18,7 +20,30 @@
 <div>
     <h2>Adres URL:</h2>
     <p>{{ data.url }}</p>
+    <button onclick="copyToClipboard('{{ data.url }}')">Kopiuj do schowka</button>
 </div>
+<script>
+    function downloadQR() {
+        var qrImage = document.getElementById("qrCodeImage");
+        var imageSource = qrImage.getAttribute('src');
+        var fileName = "qr_code.png";
+        var link = document.createElement("a");
+        link.href = imageSource;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
 
+    function copyToClipboard(text) {
+        var tempInput = document.createElement("input");
+        tempInput.value = text;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+        alert("Skopiowano adres URL do schowka: " + text);
+    }
+</script>
 </body>
 </html>
