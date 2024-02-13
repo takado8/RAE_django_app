@@ -1,6 +1,6 @@
 from django.urls import path
-from django_app.views import create_vcard, result_url_page
-from django_app.views import CustomLoginView
+from vcard_creation.views import create_vcard, result_url_page
+from vcard_creation.views import CustomLoginView
 from django.conf.urls.static import static
 from django.conf import settings
 

@@ -4,8 +4,8 @@ from django.http import HttpResponse
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 
-from django_app.models import VCardModel
-from django_app.vcard_url_service import generate_qr_img, generate_url
+from vcard_creation.models import VCardModel
+from vcard_creation.vcard_url_service import generate_qr_img, generate_url
 
 
 class CustomLoginView(LoginView):
@@ -39,14 +39,15 @@ def create_vcard(request):
             'phone': phone,
             'email': email,
             'website': website,
-            'image_path': vcard.image.url
+            'image_path': vcard.image.url if image else None
         }
         print(f"Name: {name}")
         print(f"Organization: {organization}")
         print(f"Phone: {phone}")
         print(f"Email: {email}")
         print(f"Website: {website}")
-        print(f"Image: {vcard.image.url}")
+        if image:
+            print(f"Image: {vcard.image.url}")
 
         return redirect('vcard_result')
     else:
