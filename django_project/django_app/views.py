@@ -5,6 +5,7 @@ from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 
 from django_app.models import VCardModel
+from django_app.vcard_url_service import generate_qr_img, generate_url
 
 
 class CustomLoginView(LoginView):
@@ -17,7 +18,6 @@ class CustomLoginView(LoginView):
 @login_required
 def create_vcard(request):
     if request.method == 'POST':
-        # Retrieve data from the form
         name = request.POST.get('name')
         organization = request.POST.get('organization')
         phone = request.POST.get('phone')
@@ -48,14 +48,20 @@ def create_vcard(request):
         print(f"Website: {website}")
         print(f"Image: {vcard.image.url}")
 
-        success_msg = "VCard created successfully!"
-        print(success_msg)
-        # Redirect to result page
         return redirect('vcard_result')
     else:
         return render(request, 'create_vcard.html')
 
 
 def result_url_page(request):
-    vcard_data = request.session.get('vcard_data', None)
-    return render(request, 'result_url_page.html', {'data': vcard_data})
+    vcard_url = generate_url(request)
+    qr_image = generate_qr_img(vcard_url)
+    context = {
+        'data': {
+            'qr_image': qr_image,
+            'url': vcard_url,
+        }
+    }
+    return render(request, 'result_url_page.html', context)
+
+

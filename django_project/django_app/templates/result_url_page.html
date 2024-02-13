@@ -9,15 +9,15 @@
 <h1>Oto Twoje dane</h1>
 <div>
     <h2>Kod QR:</h2>
-    {% if data.image_path %}
-    <img src="{{ data.image_path }}" alt="QR">
+    {% if data.qr_image %}
+    <img src="data:image/png;base64,{{ data.qr_image }}" alt="QR">
     {% else %}
     <p>No QR available.</p>
     {% endif %}
 </div>
 <div>
     <h2>Adres URL:</h2>
-    <p>{{ data.website }}</p>
+    <p>{{ data.url }}</p>
 </div>
 
 </body>
