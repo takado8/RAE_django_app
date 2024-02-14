@@ -24,7 +24,8 @@ def generate_qr_img(vcard_url):
 def generate_url(request):
     # Constructing the complete URL dynamically
     username = request.session.get('vcard_data')['name'].replace(' ', '').lower()
+    vcard_id = request.session.get('vcard_data')['vcard_id']
     scheme = request.scheme
     host = request.get_host()
-    vcard_url = f"{scheme}://{host}/vcard/{username}"
+    vcard_url = f"{scheme}://{host}/vcard/{vcard_id}/{username}"
     return vcard_url

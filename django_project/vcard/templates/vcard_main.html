@@ -9,17 +9,16 @@
 </head>
 <body>
     <div>
-        <h1>{% block header %}Page Header{% endblock %}</h1>
-        <p>{% block short_text %}Short Description{% endblock %}</p>
-        <img src="{% block image %}/media/images/aaaaaa.png{% endblock %}" alt="Image">
+        <h2>{% block header %}Cześć, tu {{ data.name }} z {{ data.organization }}.{% endblock %}</h2>
+        <p>{% block short_text %}Proszę, zostaw mi numer kontaktowy, a ja wyślę Ci moją wizytówkę.{% endblock %}</p>
+        <img src="{% block image %}{{ data.img_url }}{% endblock %}" alt="Image">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <label for="phone">Phone:</label>
-            <input type="tel" id="phone" name="phone">
+            <input type="tel" id="phone" name="phone" placeholder="Wpisz swój numer telefonu...">
             <button type="submit">Submit</button>
         </form>
-        <p>{% block additional_text %}Additional Information{% endblock %}</p>
-        <a href="{% url 'download_vcf' %}"><button>Download vCard</button></a>
+        <p>{% block additional_text %}lub jeśli nie chcesz to{% endblock %}</p>
+        <a href="{% url 'download_vcf' data.vcard_id %}"><button>POBIERZ MOJĄ WIZYTÓWKĘ</button></a>
     </div>
 </body>
 </html>

@@ -1,4 +1,9 @@
 from vcard_creation.models import VCardModel
 from django.contrib import admin
 
-admin.site.register(VCardModel)
+
+class VCardModelAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name']
+
+
+admin.site.register(VCardModel, VCardModelAdmin)

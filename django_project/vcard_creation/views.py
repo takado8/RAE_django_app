@@ -34,6 +34,7 @@ def create_vcard(request):
         )
         # Store data in session
         request.session['vcard_data'] = {
+            'vcard_id': vcard.id,
             'name': name,
             'organization': organization,
             'phone': phone,
