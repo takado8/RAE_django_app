@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Page</title>
+</head>
+<body>
+    <header>
+        <h2>W kontakcie!</h2>
+    </header>
+    <p>Dzięki za przekazanie kontaktu, mój otrzymasz do 5 minut. Do usłyszenia!</p>
+
+    <section>
+        <img src="{{ image_url }}" alt="Image" width="300">
+    </section>
+    <p>Tak, to ten mem! Jest ok?</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" name="option" value="NIE OK">
+        <input type="submit" name="option" value="OK">
+    </form>
+</body>
+</html>

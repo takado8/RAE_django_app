@@ -1,3 +1,6 @@
+import os
+import random
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import vobject
@@ -74,6 +77,20 @@ def vcard_page_3(request):
             comments.append({'preferred_topic': text_input})
 
         post_lead(phone_number, comments=comments if comments else None)
-        return HttpResponse("Form submitted successfully!")
+        return redirect('final_page')
     else:
         return render(request, 'vcard_page_3.html')
+
+
+def final_page(request):
+    if request.method == 'POST':
+        option = request.POST.get('option')
+        phone_number = request.session.get('lead')['phone_number']
+        post_lead(phone_number, comments=[{'mem_ok': option.lower()}])
+        return HttpResponse("Form submitted successfully!")
+    else:
+        random_meme = random.choice(os.listdir('media/memes'))
+        context = {
+            'image_url': f'/media/memes/{random_meme}'
+        }
+        return render(request, 'vcard_final_page.html', context)
