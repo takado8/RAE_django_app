@@ -56,6 +56,24 @@ def vcard_page_2(request):
 
         post_lead(phone_number, name=name, surname=surname, email=email,
             comments=[{'organization': organization}])
-        return HttpResponse("Form submitted successfully!")
+        return redirect('vcard_page_3')
     else:
         return render(request, 'vcard_page_2.html')
+
+
+def vcard_page_3(request):
+    if request.method == 'POST':
+        # Handle form submission
+        date = request.POST.get('date')
+        text_input = request.POST.get('text_input')
+        phone_number = request.session.get('lead')['phone_number']
+        comments = []
+        if date:
+            comments.append({'preferred_date': str(date)})
+        if text_input:
+            comments.append({'preferred_topic': text_input})
+
+        post_lead(phone_number, comments=comments if comments else None)
+        return HttpResponse("Form submitted successfully!")
+    else:
+        return render(request, 'vcard_page_3.html')

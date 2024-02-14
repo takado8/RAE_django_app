@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCard Form</title>
+</head>
+<body>
+    <h2>Aaa... i jeszcze jedno</h2>
+    <p>Jeśli chciałbyś żebym zadzwonił konkretnego dnia, godzinie lub w temacie to napisz! Dzięki!</p>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="date" id="date_input" name="date" placeholder="Data"><br><br>
+        <textarea id="text_input" name="text_input" rows="4" cols="50" placeholder="Temat"></textarea><br><br>
+        <input type="submit" value="Wyślij">
+    </form>
+    <p>Teraz już na pewno będzie mem :)!</p>
+</body>
+</html>
