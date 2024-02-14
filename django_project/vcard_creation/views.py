@@ -24,6 +24,9 @@ def create_vcard(request):
         email = request.POST.get('email')
         website = request.POST.get('website')
         image = request.FILES.get('image')
+        phone = phone.replace(' ', '').replace('-', '')
+        if not phone.startswith('+48'):
+            phone = '+48' + phone
         vcard = VCardModel.objects.create(
             name=name,
             organization=organization,

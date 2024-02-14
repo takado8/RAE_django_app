@@ -35,12 +35,13 @@ def download_vcf(request, vcard_id):
     vcard_model = VCardModel.objects.get(id=vcard_id)
     vcard = vobject.vCard()
     vcard.add('fn').value = vcard_model.name
-    vcard.add('org').value =[vcard_model.organization]
+    vcard.add('org').value = [vcard_model.organization]
     vcard.add('tel').value = vcard_model.phone
     vcard.add('email').value = vcard_model.email
     # Serve vCard as attachment
+    filename = vcard_model.name.replace(' ', '_')
     response = HttpResponse(vcard.serialize(), content_type='text/vcard')
-    response['Content-Disposition'] = 'attachment; filename="contact.vcf"'
+    response['Content-Disposition'] = f'attachment; filename="contact_{filename}.vcf"'
     return response
 
 
