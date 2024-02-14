@@ -12,6 +12,9 @@ def vcard_main_view(request, vcard_id, username):
     if request.method == 'POST':
         # Handle form submission
         phone_number = request.POST.get('phone')
+        phone_number = phone_number.replace(' ', '').replace('-', '')
+        if not phone_number.startswith('+48'):
+            phone_number = '+48' + phone_number
         request.session['lead'] = {
             'phone_number': phone_number,
         }
