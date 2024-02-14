@@ -2,13 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import vobject
 from vcard_creation.models import VCardModel
+from vcard.ceremeo_client import post_lead
 
 
 def vcard_main_view(request, vcard_id, username):
     if request.method == 'POST':
         # Handle form submission
         phone_number = request.POST.get('phone')
-
+        post_lead(phone_number)
         return HttpResponse("Form submitted successfully!")
     else:
         vcard = VCardModel.objects.get(id=vcard_id)

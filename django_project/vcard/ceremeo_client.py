@@ -20,9 +20,12 @@ def post_lead(phone, email=None, name=None, surname=None, comments: list = None)
         payload['surname'] = surname
     if comments:
         payload['comments'] = [{f'comment{i}': comment} for i, comment in enumerate(comments)]
-
+    print("MOCKING POST Lead: ")
+    print(f'URL: {url}')
+    print(f'Headers: {headers}')
+    print(f'payload: {payload}')
+    return
     response = requests.post(url, json=payload, headers=headers)
-
     if response.status_code == 200:
         print("API call successful")
         print("Response:", response.json())

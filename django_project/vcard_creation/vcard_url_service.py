@@ -27,5 +27,5 @@ def generate_url(request):
     vcard_id = request.session.get('vcard_data')['vcard_id']
     scheme = request.scheme
     host = request.get_host()
-    vcard_url = f"{scheme}://{host}/vcard/{vcard_id}/{username}"
+    vcard_url = f"{scheme}://{host}/{vcard_id}/{username}"
     return vcard_url
