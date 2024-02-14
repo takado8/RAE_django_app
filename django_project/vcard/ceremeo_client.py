@@ -9,8 +9,8 @@ headers = {'Authorization': 'Token ' + auth_token, 'Content-Type': 'application/
 
 def post_lead(phone, email=None, name=None, surname=None, comments: list = None):
     payload = {
-        "campaign_token": f"{campaign_token}",
-        "phone": f"{phone}",
+        'campaign_token': f'{campaign_token}',
+        'phone': f'{phone}',
     }
     if email:
         payload['email'] = email
@@ -19,7 +19,7 @@ def post_lead(phone, email=None, name=None, surname=None, comments: list = None)
     if surname:
         payload['surname'] = surname
     if comments:
-        payload["comments"] = [{f"comment{i}": comment} for i, comment in enumerate(comments)]
+        payload['comments'] = [{f'comment{i}': comment} for i, comment in enumerate(comments)]
 
     response = requests.post(url, json=payload, headers=headers)
 
