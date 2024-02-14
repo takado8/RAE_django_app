@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCard Form</title>
+</head>
+<body>
+    <h2>Dziękuję!</h2>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" id="name" name="name" placeholder="Twoje imię i nazwisko" required><br><br>
+        <input type="email" id="email" name="email" placeholder="Adres email" required><br><br>
+        <input type="text" id="organization" name="organization" placeholder="Firma / miejsce kontaktu"><br><br>
+
+        <input type="submit" value="Dalej">
+    </form>
+    <p>PS. Przejdź dalej to zobaczysz mema!</p>
+</body>
+</html>

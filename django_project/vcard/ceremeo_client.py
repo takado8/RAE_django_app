@@ -7,7 +7,7 @@ campaign_token = "campaign_token"
 headers = {'Authorization': 'Token ' + auth_token, 'Content-Type': 'application/json'}
 
 
-def post_lead(phone, email=None, name=None, surname=None, comments: list = None):
+def post_lead(phone, name=None, surname=None, email=None, comments: list = None):
     payload = {
         'campaign_token': f'{campaign_token}',
         'phone': f'{phone}',
@@ -19,7 +19,7 @@ def post_lead(phone, email=None, name=None, surname=None, comments: list = None)
     if surname:
         payload['surname'] = surname
     if comments:
-        payload['comments'] = [{f'comment{i}': comment} for i, comment in enumerate(comments)]
+        payload['comments'] = comments
     print("MOCKING POST Lead: ")
     print(f'URL: {url}')
     print(f'Headers: {headers}')
