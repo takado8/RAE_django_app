@@ -4,18 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VCard Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="url"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        label {
+            margin-bottom: 10px;
+        }
+        input[type="file"] {
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+        p {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h2>Dziękuję!</h2>
-    <p>Za chwilę dostaniesz ode mnie SMS. Możesz podać jeszcze jak mam Cię zapisać?</p>
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="text" id="name" name="name" placeholder="Twoje imię i nazwisko" required><br><br>
-        <input type="email" id="email" name="email" placeholder="Adres email" required><br><br>
-        <input type="text" id="organization" name="organization" placeholder="Firma / miejsce kontaktu"><br><br>
-
-        <input type="submit" value="Dalej">
-    </form>
-    <p>PS. Przejdź dalej to zobaczysz mema!</p>
+    <div class="container">
+        <h2>Dziękuję!</h2>
+        <p>Za chwilę dostaniesz ode mnie SMS. Możesz podać jeszcze jak mam Cię zapisać?</p>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" id="name" name="name" placeholder="Twoje imię i nazwisko" required><br>
+            <input type="email" id="email" name="email" placeholder="Adres email" required><br>
+            <input type="text" id="organization" name="organization" placeholder="Firma / miejsce kontaktu"><br>
+            <input type="submit" value="Dalej">
+        </form>
+        <p>PS. Przejdź dalej to zobaczysz mema!</p>
+    </div>
 </body>
 </html>
