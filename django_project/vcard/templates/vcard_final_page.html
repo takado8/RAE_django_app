@@ -4,21 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="url"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        label {
+            margin-bottom: 10px;
+        }
+        input[type="file"] {
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+        p {
+            text-align: center;
+        }
+        /* Centering the image */
+        section {
+            text-align: center;
+        }
+        section img {
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
-    <header>
+    <div class="container">
         <h2>W kontakcie!</h2>
-    </header>
-    <p>Dzięki za przekazanie kontaktu, mój otrzymasz do 5 minut. Do usłyszenia!</p>
-
-    <section>
-        <img src="{{ image_url }}" alt="Image" width="300">
-    </section>
-    <p>Tak, to ten mem! Jest ok?</p>
-    <form method="post">
-        {% csrf_token %}
-        <input type="submit" name="option" value="NIE OK">
-        <input type="submit" name="option" value="OK">
-    </form>
+        <p>Dzięki za przekazanie kontaktu, mój otrzymasz do 5 minut. Do usłyszenia!</p>
+        <section>
+            <img src="{{ image_url }}" alt="Image" width="600">
+        </section>
+        <p>Tak, to ten mem! Jest ok?</p>
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" name="option" value="NIE OK">
+            <input type="submit" name="option" value="OK">
+        </form>
+    </div>
 </body>
 </html>
