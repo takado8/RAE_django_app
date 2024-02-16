@@ -1,9 +1,11 @@
+import os
+
 import requests
 
 
-url = 'https://url_systemu/api/v1/lead/'
-auth_token = 'your_auth_token'
-campaign_token = "campaign_token"
+url = os.environ.get('API_URL') + '/api/v1/lead/'
+auth_token = os.environ.get('AUTH_TOKEN')
+campaign_token = os.environ.get('CAMPAIGN_TOKEN')
 headers = {'Authorization': 'Token ' + auth_token, 'Content-Type': 'application/json'}
 
 
@@ -20,11 +22,11 @@ def post_lead(phone, name=None, surname=None, email=None, comments: list = None)
         payload['surname'] = surname
     if comments:
         payload['comments'] = comments
-    print("MOCKING POST Lead: ")
+
+    print("POST Lead: ")
     print(f'URL: {url}')
     print(f'Headers: {headers}')
     print(f'payload: {payload}')
-    return
     response = requests.post(url, json=payload, headers=headers)
     if response.status_code == 200:
         print("API call successful")
