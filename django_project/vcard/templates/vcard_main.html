@@ -1,4 +1,3 @@
-<!-- my_template.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,18 +5,72 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Page Title{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: auto; /* Center the container horizontally */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center horizontally */
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        input[type="tel"] {
+            width: 100%;
+            height: 30px;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px; /* Added margin */
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <h2>{% block header %}Cześć, tu {{ data.name }} z {{ data.organization }}.{% endblock %}</h2>
-        <p>{% block short_text %}Proszę, zostaw mi numer kontaktowy, a ja wyślę Ci moją wizytówkę.{% endblock %}</p>
-        <img src="{% block image %}{{ data.img_url }}{% endblock %}" alt="Image">
-        <form method="post" enctype="multipart/form-data">
+    <div class="container">
+        <h2>Cześć, tu {{ data.name }} z {{ data.organization }}.</h2>
+        <p>Proszę, zostaw mi numer kontaktowy, a ja wyślę Ci moją wizytówkę.</p>
+        <img src="{{ data.img_url }}" alt="Image" style="max-width: 200px; max-height: 400px; align-self: center;">
+        <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="tel" id="phone" name="phone" placeholder="Wpisz swój numer telefonu...">
-            <button type="submit">Submit</button>
+            <input type="tel" id="phone" name="phone" placeholder="Wpisz swój numer telefonu..." required>
+            <button type="submit">Dalej</button>
         </form>
-        <p>{% block additional_text %}lub jeśli nie chcesz to{% endblock %}</p>
+        <p>lub jeśli nie chcesz to</p>
         <a href="{% url 'download_vcf' data.vcard_id %}"><button>POBIERZ MOJĄ WIZYTÓWKĘ</button></a>
     </div>
 </body>
