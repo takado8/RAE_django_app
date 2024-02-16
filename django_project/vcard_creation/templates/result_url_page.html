@@ -4,23 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Data Presentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1500px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .qr-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        img {
+            max-height: 200px;
+            margin-bottom: 15px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .qr-link {
+            padding: 10px;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .url-container {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            position: relative;
+            padding-right: 40px; /* Increased padding to ensure space for the copy icon */
+        }
+        .copy-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #333;
+            font-size: 20px; /* Increase size for better visibility */
+        }
+
+    </style>
 </head>
 <body>
-<h1>Oto Twoje dane</h1>
-<div>
-    <h2>Kod QR:</h2>
-    {% if data.qr_image %}
-    <img id="qrCodeImage" src="data:image/png;base64,{{ data.qr_image }}" alt="QR">
-    <br>
-    <a id="downloadLink" href="#" onclick="downloadQR()">Pobierz kod QR</a> <!-- Link to download QR code image -->
-    {% else %}
-    <p>No QR available.</p>
-    {% endif %}
-</div>
-<div>
-    <h2>Adres URL:</h2>
-    <p>{{ data.url }}</p>
-    <button onclick="copyToClipboard('{{ data.url }}')">Kopiuj do schowka</button>
+<div class="container">
+    <h1>Oto Twoje dane</h1>
+    <div class="qr-section">
+        <h2>Kod QR:</h2>
+        {% if data.qr_image %}
+        <img id="qrCodeImage" src="data:image/png;base64,{{ data.qr_image }}" alt="QR">
+        <a id="downloadLink" class="qr-link" href="#" onclick="downloadQR()">Pobierz kod QR</a>
+        {% else %}
+        <p>No QR available.</p>
+        {% endif %}
+    </div>
+    <div>
+        <h2>Adres URL:</h2>
+        <div class="url-container">
+            <p>{{ data.url }}</p>
+            <i class="fas fa-copy copy-icon" onclick="copyToClipboard('{{ data.url }}')"></i>
+        </div>
+    </div>
 </div>
 <script>
     function downloadQR() {
